@@ -1,2 +1,5 @@
 [ec2-wordpress]
-ec2-52-67-74-214.sa-east-1.compute.amazonaws.com
+ec2-52-67-52-11.sa-east-1.compute.amazonaws.com
+
+[ec2-nginx-app]
+ec2-52-67-52-11.sa-east-1.compute.amazonaws.com
