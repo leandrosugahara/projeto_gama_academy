@@ -1,0 +1,48 @@
+- hosts: ec2-nginx-app
+  handlers:
+    - name: "restart nginx"
+      service:
+        name: nginx
+        state: restarted
+      become: yes
+  tasks:
+    - name: "Roda: sudo apt update"
+      become: yes
+      apt:
+        upgrade: yes
+        update_cache: yes
+        cache_valid_time: 86400 #Um dia
+    
+    - name: "Instala pacotes em lote"
+      apt:
+        name: "{{ item }}"
+        state: latest
+      become: yes # roda com sudo
+      with_items:
+        - nginx
+        - unzip
+        
+    - name: "Fazendo downlaod do startbootstrap"
+      get_url:
+        url: "https://github.com/startbootstrap/startbootstrap-sb-admin-2/archive/gh-pages.zip"
+        dest: "/tmp/gh-pages.zip"
+    
+    - name: "Fazendo descompactação dos arquivos do app"
+      unarchive:
+        src: "/tmp/gh-pages.zip"
+        dest: "/var/www"
+        remote_src: yes
+      become: yes  
+
+    - name: "Configura o caminho do index.html no nginx"
+      replace:
+        path: '/etc/nginx/sites-available/default'
+        regexp: "{{ item.regex }}"
+        replace: "{{ item.value }}"
+      with_items:
+        - { regex: '/var/www', value: '/var/www/startbootstrap-sb-admin-2-gh-pages' }
+      become: yes
+      notify:
+        - "restart nginx"
+
+   
