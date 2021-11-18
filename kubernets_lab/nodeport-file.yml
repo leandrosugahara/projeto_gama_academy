@@ -1,0 +1,17 @@
+# Cria recurso externo do cluster, pode ser utilizado um nginx com proxypass para um unico IP
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: nodeport-pod-nodejs
+spec:
+  type: NodePort
+  ports:
+    - port: 8080
+      nodePort: 30000 # 30000 ~ 32767
+  selector:
+    app: leandsu-nodejs
+
+# kubectl apply -f node-port-nginx.yml
+# kubectl describe -f node-port-nginx.yml
+# kubectl delete -f node-port-nginx.yml

@@ -1,0 +1,34 @@
+#criar arquivos diferentes no master para subir os pods
+
+#pod 1
+apiVersion: v1
+kind: Pod
+metadata:
+  name: didox-nginx
+  labels:
+    app: didox-nginx # tag para associar recursos
+spec:
+  containers:
+    - name: container-pod-nginx # a imagem está no dockerhub
+      image: nginx:latest
+      ports:
+        - containerPort: 80
+
+#pod 2
+apiVersion: v1
+kind: Pod
+metadata:
+  name: leandsu-nodejs
+  labels:
+    app: leandsu-nodejs # tag para associar recursos
+spec:
+  containers:
+    - name: container-pod-nodejs # a imagem está no dockerhub
+      image: leandsu/app-validadorcpf-java
+      ports:
+        - containerPort: 3000
+
+# kubectl apply -f pod-nginx.yml
+# kubectl describe -f pod-nginx.yml
+# kubectl delete -f pod-nginx.yml
+# pode ser gerado com kubectl run leandsu-nginx --image=nginx --port 80 --dry-run=client -o yaml>pod-nginx.yml 
