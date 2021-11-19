@@ -1,12 +1,12 @@
 -- tetminal
 -- restaura dump
-mysql -u root -p SpringWebYoutubeTest < dump-mysql.sql
+mysql -u root -p SpringWebYoutube < dump-mysql.sql
 -- fazer dump
-mysqldump --user root --password  SpringWebYoutubeTest > all-databases.sql
+mysqldump --user root --password  SpringWebYoutube > all-databases.sql
 
 --  scripts
-create database SpringWebYoutubeTest;
-use SpringWebYoutubeTest;
+create database SpringWebYoutube;
+use SpringWebYoutube;
 
 CREATE TABLE `administradores` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
