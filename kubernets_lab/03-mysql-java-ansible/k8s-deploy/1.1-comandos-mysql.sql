@@ -17,6 +17,6 @@ CREATE TABLE `administradores` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
-insert into administradores(email, nome, observacao, senha)values('danilo@teste.com', 'danilo', 'treinamento k8s', '123456');
+insert into administradores(email, nome, observacao, senha)values('leandro@teste.com', 'leandro', 'treinamento k8s', '123456');
 
 select * from administradores;
