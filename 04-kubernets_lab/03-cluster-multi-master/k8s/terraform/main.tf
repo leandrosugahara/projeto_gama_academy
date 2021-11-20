@@ -22,7 +22,7 @@ resource "aws_instance" "k8s_proxy" {
     volume_size = 8
   } 
   tags = {
-    Name = "k8s-haproxy_leandsu"
+    Name = "k8s-haproxy-leandsu"
   }
   vpc_security_group_ids = [aws_security_group.k8s_acessos_haproxy.id]
 }
@@ -153,34 +153,34 @@ resource "aws_security_group" "k8s_acessos_haproxy" {
       security_groups: null,
       self: null
     },
-    # {
-    #   cidr_blocks      = []
-    #   description      = "Libera acesso k8s_masters"
-    #   from_port        = 0
-    #   ipv6_cidr_blocks = []
-    #   prefix_list_ids  = []
-    #   protocol         = "-1"
-    #   security_groups  = [
-    #     # "${aws_security_group.k8s_acessos_masters.id}", 
-    #     "sg-07215cec0dfdf8891" # master
-    #   ]
-    #   self             = false
-    #   to_port          = 0
-    # },
-    # {
-    #   cidr_blocks      = []
-    #   description      = "Libera acesso k8s_workers"
-    #   from_port        = 0
-    #   ipv6_cidr_blocks = []
-    #   prefix_list_ids  = []
-    #   protocol         = "-1"
-    #   security_groups  = [
-    #     # "${aws_security_group.k8s_acessos_masters.id}", 
-    #     "sg-03e4df8ed6adfb399"  # worker
-    #   ]
-    #   self             = false
-    #   to_port          = 0
-    # },
+    {
+      cidr_blocks      = []
+      description      = "Libera acesso k8s_masters"
+      from_port        = 0
+      ipv6_cidr_blocks = []
+      prefix_list_ids  = []
+      protocol         = "-1"
+      security_groups  = [
+        # "${aws_security_group.k8s_acessos_masters.id}", 
+        "sg-00b646360b2538cbb" # master
+      ]
+      self             = false
+      to_port          = 0
+    },
+    {
+      cidr_blocks      = []
+      description      = "Libera acesso k8s_workers"
+      from_port        = 0
+      ipv6_cidr_blocks = []
+      prefix_list_ids  = []
+      protocol         = "-1"
+      security_groups  = [
+        # "${aws_security_group.k8s_acessos_masters.id}", 
+        "sg-0f85578058e44266a"  # worker
+      ]
+      self             = false
+      to_port          = 0
+    },
     {
       cidr_blocks      = []
       description      = ""
@@ -319,18 +319,15 @@ output "output-k8s_proxy" {
 }
 
 output "sg_masters" {
-  value = [
-    "sg dos masters - ${aws_security_group.k8s_acessos_masters.id}"
-  ]
+  value = "sg dos masters - ${aws_security_group.k8s_acessos_masters.id}"
 }
+
 output "sg-haproxy" {
   value = "sg do haproxy - ${aws_security_group.k8s_acessos_haproxy.id}"
 }
 
 output "sg_workers" {
-  value = [
-    "sg dos workers - ${aws_security_group.k8s_acessos_workers.id}"
-  ]
+  value = "sg dos workers - ${aws_security_group.k8s_acessos_workers.id}"
 }
 
 

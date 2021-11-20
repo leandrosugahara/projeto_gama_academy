@@ -1,28 +1,28 @@
 - hosts: all
   become: yes
   tasks:
-    - name: "Upload k8s-deploy"
-      copy:
-        src: "k8s-deploy"
-        dest: "/root/"
+    # - name: "Upload k8s-deploy"
+    #   copy:
+    #     src: "k8s-deploy"
+    #     dest: "/root/"
     
-    - name: "Aplicar configmap"
-      shell: kubectl apply -f /root/k8s-deploy/7-mysql-configmap.yml
+    # - name: "Aplicar configmap"
+    #   shell: kubectl apply -f /root/k8s-deploy/7-mysql-configmap.yml
 
-    - name: "Aplicar secret"
-      shell: kubectl apply -f /root/k8s-deploy/7.1-mysql-secret.yml
+    # - name: "Aplicar secret"
+    #   shell: kubectl apply -f /root/k8s-deploy/7.1-mysql-secret.yml
 
-    - name: "Aplicar mysql"
-      shell: kubectl apply -f /root/k8s-deploy/7.2-mysql.yml
+    # - name: "Aplicar mysql"
+    #   shell: kubectl apply -f /root/k8s-deploy/7.2-mysql.yml
 
-    - name: "Aplicar secret"
-      shell: kubectl apply -f /root/k8s-deploy/7.3-deployment.yml
+    # - name: "Aplicar secret"
+    #   shell: kubectl apply -f /root/k8s-deploy/7.3-deployment.yml
 
-    - name: "Aplicar nodeport"
-      shell: kubectl apply -f /root/k8s-deploy/7.4-nodeport-javadb.yml
+    # - name: "Aplicar nodeport"
+    #   shell: kubectl apply -f /root/k8s-deploy/7.4-nodeport-javadb.yml
 
-    - name: "Aplicar hpa"
-      shell: kubectl apply -f /root/k8s-deploy/7.5-hpa.yaml
+    # - name: "Aplicar hpa"
+    #   shell: kubectl apply -f /root/k8s-deploy/7.5-hpa-javadb.yml
 
     - shell: "kubectl get pods | grep mysql"
       register: ps
