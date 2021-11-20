@@ -15,7 +15,7 @@
     - name: "Aplicar mysql"
       shell: kubectl apply -f /root/k8s-deploy/7.2-mysql.yml
 
-    - name: "Aplicar deployment"
+    - name: "Aplicar secret"
       shell: kubectl apply -f /root/k8s-deploy/7.3-deployment.yml
 
     - name: "Aplicar nodeport"
