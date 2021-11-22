@@ -1,17 +1,23 @@
 provider "aws" {
-  region = "us-east-1"
+  region = "sa-east-1"
 }
 
-data "http" "myip" {
-  url = "http://ipv4.icanhazip.com" # outra opção "https://ifconfig.me"
-}
+# data "http" "myip" {
+#   url = "http://ipv4.icanhazip.com" # outra opção "https://ifconfig.me"
+# }
 
 resource "aws_instance" "dev_img_deploy_jenkins" {
-  ami           = "ami-09e67e426f25ce0d7"
+  ami           = "ami-0e66f5495b4efdd0f"
   instance_type = "t2.micro"
-  key_name      = "chave-jenkins"
+  key_name      = "leandsu_ec2_dev"
+  subnet_id                   = "subnet-037d9188710cf6ac2"
+  associate_public_ip_address = true
+  root_block_device {
+    encrypted   = true
+    volume_size = 8
+  }
   tags = {
-    Name = "dev_img_deploy_jenkins"
+    Name = "dev_img_deploy_jenkins-leandsu"
   }
   vpc_security_group_ids = [aws_security_group.acesso_jenkins_dev_img.id]
 }
@@ -19,7 +25,8 @@ resource "aws_instance" "dev_img_deploy_jenkins" {
 resource "aws_security_group" "acesso_jenkins_dev_img" {
   name        = "acesso_jenkins_dev_img"
   description = "acesso_jenkins_dev_img inbound traffic"
-
+  vpc_id      = "vpc-0aff49d1cddbfff86"
+  
   ingress = [
     {
       description      = "SSH from VPC"
@@ -60,7 +67,7 @@ resource "aws_security_group" "acesso_jenkins_dev_img" {
   ]
 
   tags = {
-    Name = "jenkins-dev-img-lab"
+    Name = "jenkins-dev-img-lab-leandsu"
   }
 }
 
