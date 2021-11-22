@@ -1,4 +1,4 @@
 #!/bin/bash
 
-cd 08-jenkins/deploy-infra-img-java-app/terraform
-/home/ubuntu/terraform destroy -auto-approve
+cd 05-jenkins_lab/deploy-infra-img-java-app/terraform
+terraform destroy -auto-approve
