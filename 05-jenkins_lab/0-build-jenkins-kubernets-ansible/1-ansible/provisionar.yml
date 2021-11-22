@@ -18,7 +18,7 @@
     - name: "Instala unzip"
       shell: "sudo apt install unzip -y"
 
-    # - name: "Instala awscli"
+    # - name: "Instala awscli" #sandbox nao precisa
     #   shell: "apt install awscli -y"
       
     - name: "Instala java"
