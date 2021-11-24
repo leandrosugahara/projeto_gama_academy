@@ -32,3 +32,120 @@ variable "my_key_name" {
   #default = "leandsu-part"
 }
 
+variable "my_key_dev" {
+  type        = string
+  description = "Key Pair para DEV"
+}
+
+variable "ip_haproxy" {
+  type = string
+    # default = "187.3.223.136"
+  description = "Passe aqui o IP do haproxy"
+}
+
+variable "ids_subnets" {
+  type        = list(string)
+  # default     = [
+  #   "subnet-037d9188710cf6ac2",
+  #   "subnet-0bb9a1894421c8d22",
+  #   "subnet-0e9e0ad7b155646eb"
+  # ]
+}
+
+variable "tipo_master" {
+  type        = list(string)
+  # default     = [
+  #   "t2.large",
+  #   "t3.large",
+  #   "t2.large"
+  # ]
+}
+
+variable "tipo_worker" {
+  type        = list(string)
+  # default     = [
+  #   "t2.medium",
+  #   "t3.medium",
+  #   "t2.medium"
+  # ]
+}
+
+# variable "sg_front_object" {
+#   description = "Security group data for Frontend in Kubernetes environment."
+#   type = object({
+#       name = string
+#       description = string
+#   })
+# }
+
+# variable "sg_hproxy_object" {
+#   description = "Security group data for HPROXY in Kubernetes environment."
+#   type = object({
+#       name = string
+#       description = string
+#   })
+# }
+
+# variable "sg_master_object" {
+#   description = "Security group data for Master nodes in Kubernetes environment."
+#   type = object({
+#       name = string
+#       description = string
+#   })
+# }
+
+# variable "sg_worker_object" {
+#   description = "Security group data for Worker nodes in Kubernetes environment."
+#   type = object({
+#       name = string
+#       description = string
+#   })
+# }
+
+# variable "instance_k8s_front_object" {
+#   description = "Instance template data for Frontend in Kubernetes environment."
+#   type = object({
+#       name = string
+#       type = string
+#       key_pair = string
+#       iam_profile = string
+#       number_of_nodes = number
+#       public_ip = bool
+#   })
+# }
+
+# variable "instance_k8s_hproxy_object" {
+#   description = "Instance template data for HPROXY in Kubernetes environment."
+#   type = object({
+#       name = string
+#       type = string
+#       key_pair = string
+#       iam_profile = string
+#       number_of_nodes = number
+#       public_ip = bool
+#   })
+# }
+
+# variable "instance_k8s_master_object" {
+#   description = "Instance template data for Master nodes in Kubernetes environment."
+#   type = object({
+#       name = string
+#       type = string
+#       key_pair = string
+#       iam_profile = string
+#       number_of_nodes = number
+#       public_ip = bool
+#   })
+# }
+
+# variable "instance_k8s_worker_object" {
+#   description = "Instance template data for Worker nodes in Kubernetes environment."
+#   type = object({
+#       name = string
+#       type = string
+#       key_pair = string
+#       iam_profile = string
+#       number_of_nodes = number
+#       public_ip = bool
+#   })
+# }
