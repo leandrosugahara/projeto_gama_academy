@@ -7,7 +7,7 @@
 #### idéia para buscar itens do debugger do ansible ####
 # | grep -oP "(kubeadm join.*?certificate-key.*?)'" | sed 's/\\//g' | sed "s/'//g" | sed "s/'t//g" | sed "s/,//g"
 
-cd 0-terraform
+cd 10-final_lab/01-pipeline_infra/1-deploy-k8s/0-terraform
 terraform init
 terraform apply -auto-approve
 
