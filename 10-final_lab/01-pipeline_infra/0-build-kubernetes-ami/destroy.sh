@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cd 0-terraform
+cd 10-final_lab/01-pipeline_infra/0-build-kubernetes-ami/0-terraform
 ID_MAQUINA=$(terraform output | grep id | awk '{print $2;exit}')
 echo ${ID_MAQUINA/\",/}
 
