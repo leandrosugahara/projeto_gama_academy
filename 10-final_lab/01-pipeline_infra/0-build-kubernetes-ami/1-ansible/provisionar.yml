@@ -1,6 +1,5 @@
 - hosts: all
   tasks:
-
     - name: install packages required by docker
       become: true
       apt:
@@ -57,7 +56,6 @@
     - name: Disable swap
       command: swapoff -a
       when: ansible_swaptotal_mb > 0
-      become: true
 
     - name: Add an apt signing key for Kubernetes
       become: true
@@ -90,3 +88,6 @@
         name: kubelet
         daemon_reload: yes
         state: restarted
+
+    - name: "Instala ansible"
+      shell: "sudo apt install ansible -y"
