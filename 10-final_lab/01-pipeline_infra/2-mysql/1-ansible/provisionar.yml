@@ -7,7 +7,13 @@
   
   become: yes
 
-  tasks:    
+  tasks:
+    - name: "Roda: sudo apt-get update"
+      become: true
+      apt:
+        upgrade: yes
+        update_cache: yes
+
     - name: "Instala pacotes"
       apt:
         name: "{{ item }}"
