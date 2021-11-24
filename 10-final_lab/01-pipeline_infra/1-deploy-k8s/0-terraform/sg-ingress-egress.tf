@@ -119,15 +119,15 @@ resource "aws_security_group_rule" "master_k8s_ingress_ssh" {
 #   security_group_id = aws_security_group.acessos_g4_masters.id
 # }
 
-resource "aws_security_group_rule" "master_k8s_ingress_masters" {
-  type              = "ingress"
-  description       = "SG rule allowing Masters SG to access Master SG."
-  from_port         = 0
-  to_port           = 0
-  protocol          = "all"
-  self             = true
-  security_group_id = aws_security_group.acessos_g4_masters.id
-}
+# resource "aws_security_group_rule" "master_k8s_ingress_masters" {
+#   type              = "ingress"
+#   description       = "SG rule allowing Masters SG to access Master SG."
+#   from_port         = 0
+#   to_port           = 0
+#   protocol          = "all"
+#   self             = true
+#   security_group_id = aws_security_group.acessos_g4_masters.id
+# }
 
 resource "aws_security_group_rule" "master_k8s_ingress_hproxy" {
   type             = "ingress"
@@ -192,3 +192,36 @@ resource "aws_security_group_rule" "worker_k8s_egress_all" {
   ipv6_cidr_blocks  = ["::/0"]
   security_group_id = aws_security_group.acessos_g4_workers.id
 }
+
+resource "aws_security_group_rule" "masters_k8s_ingress_master_main" {
+  type             = "ingress"
+  description      = "SG masters to master main."
+  from_port        = 0
+  to_port          = 0
+  protocol         = "all"
+  source_security_group_id = aws_security_group.acessos_g4_master_main.id
+  security_group_id = aws_security_group.acessos_g4_masters.id
+}
+
+resource "aws_security_group_rule" "master_main_k8s_ingress_haproxy" {
+  type             = "ingress"
+  description      = "SG master main to haproxy."
+  from_port        = 0
+  to_port          = 0
+  protocol         = "all"
+  source_security_group_id = aws_security_group.acessos_g4_haproxy.id
+  security_group_id = aws_security_group.acessos_g4_master_main.id
+}
+
+resource "aws_security_group_rule" "master_main_k8s_ingress_workers" {
+  type             = "ingress"
+  description      = "SG master main to workers."
+  from_port        = 0
+  to_port          = 0
+  protocol         = "all"
+  source_security_group_id = aws_security_group.acessos_g4_workers.id
+  security_group_id = aws_security_group.acessos_g4_master_main.id
+}
+
+# acessos_g4_masters
+# acessos_g4_master_main
