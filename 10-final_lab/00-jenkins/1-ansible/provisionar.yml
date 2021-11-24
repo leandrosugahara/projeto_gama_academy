@@ -102,6 +102,9 @@
       register: ps
     - debug: var=ps.stdout_lines
 
+    - name: "CoCria pasta para chave privada" 
+      shell: "mkdir /var/lib/jenkins/.ssh"
+
     - name: "Copia chave privada" 
       copy: 
         src: "/home/ubuntu/.ssh/id_rsa" 

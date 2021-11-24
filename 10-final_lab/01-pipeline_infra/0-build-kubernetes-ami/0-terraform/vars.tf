@@ -32,3 +32,7 @@ variable "my_key_name" {
   #default = "leandsu-part"
 }
 
+variable "my_key_dev" {
+  type        = string
+  description = "Key Pair para DEV"
+}
