@@ -26,7 +26,7 @@ echo $"Agora somente abrir a URL: http://$(terraform output | grep public | awk 
 # explorer "http://$(~/terraform/terraform output | grep public | awk '{print $2;exit}'):8080" | sed -e "s/\",//g"" #windows
 # nautilus "http://$(~/terraform/terraform output | grep public | awk '{print $2;exit}'):8080" | sed -e "s/\",//g"" #linux
 
-ID_MAQUINA=$(/terraform output | grep id | awk '{print $2;exit}')
+ID_MAQUINA=$(terraform output | grep id | awk '{print $2;exit}')
 echo ${ID_MAQUINA/\",/}
 
 # cd ../2-terraform-ami/

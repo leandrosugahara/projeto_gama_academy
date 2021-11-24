@@ -1,0 +1,27 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Clone Git') { 
+            steps { 
+                git url: 'https://github.com/leandrosugahara/projeto_gama_academy.git', 
+                branch: 'main' 
+            } 
+        }
+        stage('Build EC2') {
+            steps {
+                sh "10-final_lab/01-pipeline_infra/0-build-kubernetes-ami/deploy.sh"
+            }
+        }
+        stage('Build AMI') {
+            steps {
+                sh "10-final_lab/01-pipeline_infra/0-build-kubernetes-ami/package-ami.sh"
+            }
+        }
+        stage('Destroy Test EC2') {
+            steps {
+                sh "10-final_lab/01-pipeline_infra/0-build-kubernetes-ami/destroy.sh"
+            }
+        }
+    }
+}
