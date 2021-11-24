@@ -19,7 +19,7 @@ resource "aws_instance" "ec2_g4_myslq" {
   vpc_security_group_ids = [aws_security_group.acessos_g4_mysql.id]
 }
 
-resource "aws_security_group" "mysql" {
+resource "aws_security_group" "acessos_g4_mysql" {
   name        = "acessos_mysql"
   description = "acessos_mysql inbound traffic"
   vpc_id      = var.my_vpc_id
@@ -70,7 +70,7 @@ resource "aws_security_group" "mysql" {
 
 output "ec2-g4-mysql" {
   value = [
-    for key, item in aws_instance.k8s_g4_masters :
+    for key, item in aws_instance.ec2_g4_myslq :
       "ec2-g4-mysql ${key+1} - ${item.private_ip} - ssh -i ~/.ssh/id_rsa ubuntu@${item.public_dns} -o ServerAliveInterval=60"
   ]
 }
