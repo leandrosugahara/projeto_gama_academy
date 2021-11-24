@@ -3,7 +3,7 @@ provider "aws" {
 }
 
 resource "aws_ami_from_instance" "ami-kubernetes" {
-  name               = "terraform-kubernetes-${var.versao}"
+  name               = "terraform-kubernetes-${var.versao}-leandsu"
   source_instance_id = var.resource_id
 }
 
