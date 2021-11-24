@@ -14,28 +14,28 @@ terraform apply -auto-approve
 echo  "Aguardando a criação das maquinas ..."
 sleep 5
 
-ID_M1=$(terraform output | grep 'k8s-master 1 -' | awk '{print $4;exit}')
-ID_M1_DNS=$(terraform output | grep 'k8s-master 1 -' | awk '{print $9;exit}' | cut -b 8-)
+ID_M1=$(terraform output | grep 'k8s-g4-master 1 -' | awk '{print $4;exit}')
+ID_M1_DNS=$(terraform output | grep 'k8s-g4-master 1 -' | awk '{print $9;exit}' | cut -b 8-)
 
-ID_M2=$(terraform output | grep 'k8s-master 2 -' | awk '{print $4;exit}')
-ID_M2_DNS=$(terraform output | grep 'k8s-master 2 -' | awk '{print $9;exit}' | cut -b 8-)
+ID_M2=$(terraform output | grep 'k8s-g4-master 2 -' | awk '{print $4;exit}')
+ID_M2_DNS=$(terraform output | grep 'k8s-g4-master 2 -' | awk '{print $9;exit}' | cut -b 8-)
 
-ID_M3=$(terraform output | grep 'k8s-master 3 -' | awk '{print $4;exit}')
-ID_M3_DNS=$(terraform output | grep 'k8s-master 3 -' | awk '{print $9;exit}' | cut -b 8-)
-
-
-ID_HAPROXY=$(terraform output | grep 'k8s_proxy -' | awk '{print $3;exit}')
-ID_HAPROXY_DNS=$(terraform output | grep 'k8s_proxy -' | awk '{print $8;exit}' | cut -b 8-)
+ID_M3=$(terraform output | grep 'k8s-g4-master 3 -' | awk '{print $4;exit}')
+ID_M3_DNS=$(terraform output | grep 'k8s-g4-master 3 -' | awk '{print $9;exit}' | cut -b 8-)
 
 
-ID_W1=$(terraform output | grep 'k8s-workers 1 -' | awk '{print $4;exit}')
-ID_W1_DNS=$(terraform output | grep 'k8s-workers 1 -' | awk '{print $9;exit}' | cut -b 8-)
+ID_HAPROXY=$(terraform output | grep 'k8s_g4_proxy -' | awk '{print $3;exit}')
+ID_HAPROXY_DNS=$(terraform output | grep 'k8s_g4_proxy -' | awk '{print $8;exit}' | cut -b 8-)
 
-ID_W2=$(terraform output | grep 'k8s-workers 2 -' | awk '{print $4;exit}')
-ID_W2_DNS=$(terraform output | grep 'k8s-workers 2 -' | awk '{print $9;exit}' | cut -b 8-)
 
-ID_W3=$(terraform output | grep 'k8s-workers 3 -' | awk '{print $4;exit}')
-ID_W3_DNS=$(terraform output | grep 'k8s-workers 3 -' | awk '{print $9;exit}' | cut -b 8-)
+ID_W1=$(terraform output | grep 'k8s-g4-workers 1 -' | awk '{print $4;exit}')
+ID_W1_DNS=$(terraform output | grep 'k8s-g4-workers 1 -' | awk '{print $9;exit}' | cut -b 8-)
+
+ID_W2=$(terraform output | grep 'k8s-g4-workers 2 -' | awk '{print $4;exit}')
+ID_W2_DNS=$(terraform output | grep 'k8s-g4-workers 2 -' | awk '{print $9;exit}' | cut -b 8-)
+
+ID_W3=$(terraform output | grep 'k8s-g4-workers 3 -' | awk '{print $4;exit}')
+ID_W3_DNS=$(terraform output | grep 'k8s-g4-workers 3 -' | awk '{print $9;exit}' | cut -b 8-)
 
 echo "
 [ec2-k8s-proxy]
@@ -96,21 +96,21 @@ frontend kubernetes
         mode tcp
         bind $ID_HAPROXY:6443 # IP ec2 Haproxy 
         option tcplog
-        default_backend k8s-masters
+        default_backend k8s-g4-masters
 
-backend k8s-masters
+backend k8s-g4-masters
         mode tcp
         balance roundrobin # maq1, maq2, maq3  # (check) verifica 3 vezes negativo (rise) verifica 2 vezes positivo
-        server k8s-master-0 $ID_M1:6443 check fall 3 rise 2 # IP ec2 Cluster Master k8s - 1 
-        server k8s-master-1 $ID_M2:6443 check fall 3 rise 2 # IP ec2 Cluster Master k8s - 2 
-        server k8s-master-2 $ID_M3:6443 check fall 3 rise 2 # IP ec2 Cluster Master k8s - 3 
+        server k8s-g4-master-0 $ID_M1:6443 check fall 3 rise 2 # IP ec2 Cluster Master k8s - 1 
+        server k8s-g4-master-1 $ID_M2:6443 check fall 3 rise 2 # IP ec2 Cluster Master k8s - 2 
+        server k8s-g4-master-2 $ID_M3:6443 check fall 3 rise 2 # IP ec2 Cluster Master k8s - 3 
         
 " > ../1-ansible/01-k8s-install-masters_e_workers/haproxy/haproxy.cfg
 
 
 echo "
 127.0.0.1 localhost
-$ID_HAPROXY k8s-haproxy # IP privado proxy
+$ID_HAPROXY k8s-g4-haproxy # IP privado proxy
 
 # The following lines are desirable for IPv6 capable hosts
 ::1 ip6-localhost ip6-loopback
@@ -136,7 +136,7 @@ K8S_JOIN_WORKER=$(echo $ANSIBLE_OUT | grep -oP "(kubeadm join.*?discovery-token-
 echo $K8S_JOIN_MASTER
 echo $K8S_JOIN_WORKER
 
-cat <<EOF > 2-provisionar-k8s-master-auto-shell.yml
+cat <<EOF > 2-provisionar-k8s-g4-master-auto-shell.yml
 - hosts:
   - ec2-k8s-m2
   - ec2-k8s-m3
@@ -180,4 +180,4 @@ cat <<EOF > 2-provisionar-k8s-master-auto-shell.yml
         msg: " '{{ ps.stdout_lines }}' "
 EOF
 
-ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i hosts 2-provisionar-k8s-master-auto-shell.yml -u ubuntu --private-key ~/.ssh/id_rsa
+ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i hosts 2-provisionar-k8s-g4-master-auto-shell.yml -u ubuntu --private-key ~/.ssh/id_rsa
