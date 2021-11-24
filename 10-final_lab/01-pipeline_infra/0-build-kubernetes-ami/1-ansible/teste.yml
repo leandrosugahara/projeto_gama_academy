@@ -12,7 +12,7 @@
       failed_when: docker.stdout == "0"
 
     - name: "Valida k8s"
-      shell: kubectl -- version | wc -l
+      shell: kubectl --version | wc -l
       register: kubelet
       failed_when: kubelet.stdout != "0"
 
