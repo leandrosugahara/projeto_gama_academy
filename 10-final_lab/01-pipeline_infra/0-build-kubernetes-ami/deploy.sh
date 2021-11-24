@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cd 0-terraform
+cd 0-terrafor
 terraform init
 terraform fmt
 terraform apply -auto-approve

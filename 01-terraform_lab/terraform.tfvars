@@ -1,0 +1,5 @@
+my_ami = "ami-0e66f5495b4efdd0f"
+my_instance_type = "t2.micro"
+my_subnet_id = "subnet-037d9188710cf6ac2"
+my_key_name = "leandsu-part"
+my_vpc_security_group_ids = "sg-05fb5f608a43df40f"

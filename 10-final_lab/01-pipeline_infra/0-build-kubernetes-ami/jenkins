@@ -1,0 +1,53 @@
+pipeline {
+    agent any
+
+    environment {
+        TF_VAR_my_vpc_id    = ${VPC_ID}
+        TF_VAR_my_ami       = ${AMI}
+        TF_VAR_my_subnet_id = ${SUB_NET}
+        TF_VAR_my_key_name  = ${KEY_NAME}
+    }
+
+    parameters {
+        string(name:'VPC_ID', defaultValue: 'vpc-0aff49d1cddbfff86')
+        string(name:'AMI', defaultValue: 'ami-0e66f5495b4efdd0f')
+        string(name:'SUB_NET', defaultValue: 'subnet-037d9188710cf6ac2')
+        string(name:'KEY_NAME', defaultValue: 'leandsu_ec2_dev'
+    }
+
+    stages {
+        stage('Clone Git') { 
+            steps { 
+                git url: 'https://github.com/leandrosugahara/projeto_gama_academy.git', 
+                branch: 'main' 
+            } 
+        }
+        stage('OS Provision') { 
+            steps { 
+                dir("10-final_lab/01-pipeline_infra/0-build-kubernetes-ami/0-terraform"){
+                    sh """
+                    export TF_VAR_my_vpc_id=${VPC_ID}
+                    export TF_VAR_my_ami=${AMI}
+                    export TF_VAR_my_subnet_id=${SUB_NET}
+                    export TF_VAR_my_key_name=${KEY_NAME}
+                    """
+                }
+            } 
+        }
+        stage('Build EC2') {
+            steps {
+                sh "10-final_lab/01-pipeline_infra/0-build-kubernetes-ami/deploy.sh"
+            }
+        }
+        stage('Build AMI') {
+            steps {
+                sh "10-final_lab/01-pipeline_infra/0-build-kubernetes-ami/package-ami.sh"
+            }
+        }
+        stage('Destroy Test EC2') {
+            steps {
+                sh "10-final_lab/01-pipeline_infra/0-build-kubernetes-ami/destroy.sh"
+            }
+        }
+    }
+}
