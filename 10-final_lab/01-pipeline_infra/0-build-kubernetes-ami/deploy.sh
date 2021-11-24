@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cd 0-terraform
+cd 10-final_lab/01-pipeline_infra/0-build-kubernetes-ami/0-terraform
 terraform init
 terraform fmt
 terraform apply -auto-approve
