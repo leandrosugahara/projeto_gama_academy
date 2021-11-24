@@ -125,7 +125,6 @@ resource "aws_security_group_rule" "master_k8s_ingress_masters" {
   from_port         = 0
   to_port           = 0
   protocol          = "all"
-  cidr_blocks       = ["0.0.0.0/0"]
   self             = true
   security_group_id = aws_security_group.acessos_g4_masters.id
 }
