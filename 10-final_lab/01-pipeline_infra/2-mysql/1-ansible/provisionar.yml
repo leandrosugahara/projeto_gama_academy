@@ -21,6 +21,8 @@
       become: yes # roda com sudo
       with_items:
         - mysql-server
+        - python3-pycurl
+        - python3-mysqldb
       
     - name: Adicionar USER no bashrc
       lineinfile: dest=~/.bashrc line='export USER={{ lookup('env', 'USER') }}' state=present
