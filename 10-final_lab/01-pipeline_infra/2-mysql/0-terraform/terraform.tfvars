@@ -1,5 +1,5 @@
 my_vpc_id    = "vpc-0aff49d1cddbfff86"
-my_ami       = "ami-0862ed1aaf3b6a03a"
+my_ami       = "ami-0e66f5495b4efdd0f" # "ami-0862ed1aaf3b6a03a" do k8s
 my_subnet_id = "subnet-0e5e9bdebaf94396f" # subnet privada para o mysql
 my_key_name  = "leandsu_ec2_dev"
 my_key_dev  = "ssh"
