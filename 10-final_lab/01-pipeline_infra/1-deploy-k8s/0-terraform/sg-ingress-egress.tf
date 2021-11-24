@@ -119,6 +119,17 @@ resource "aws_security_group_rule" "master_k8s_ingress_ssh" {
 #   security_group_id = aws_security_group.acessos_g4_masters.id
 # }
 
+resource "aws_security_group_rule" "master_k8s_ingress_masters" {
+  type              = "ingress"
+  description       = "SG rule allowing Masters SG to access Master SG."
+  from_port         = 0
+  to_port           = 0
+  protocol          = "all"
+  cidr_blocks       = ["0.0.0.0/0"]
+  self             = true
+  security_group_id = aws_security_group.acessos_g4_masters.id
+}
+
 resource "aws_security_group_rule" "master_k8s_ingress_hproxy" {
   type             = "ingress"
   description      = "SG rule allowing HPROXY SG to access Master SG."
