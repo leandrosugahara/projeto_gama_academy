@@ -59,7 +59,7 @@ resource "aws_security_group" "kubernetes" {
 output "kubernetes" {
   value = [
     "kubernetes",
-    "id: ${aws_instance.kubernetes.id}",
+    "resource_id: ${aws_instance.kubernetes.id}",
     "private: ${aws_instance.kubernetes.private_ip}",
     "public: ${aws_instance.kubernetes.public_ip}",
     "public_dns: ${aws_instance.kubernetes.public_dns}",
