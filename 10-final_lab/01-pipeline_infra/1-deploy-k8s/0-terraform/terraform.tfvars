@@ -1,5 +1,5 @@
 my_vpc_id    = "vpc-0aff49d1cddbfff86"
-my_ami       = "ami-0862ed1aaf3b6a03a"
+my_ami       = "ami-0b45c88b75b6d5551"
 my_subnet_id = "subnet-037d9188710cf6ac2"
 my_key_name  = "leandsu_ec2_dev"
 my_key_dev  = "ssh"
