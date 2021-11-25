@@ -70,7 +70,7 @@ resource "aws_security_group" "acessos_g4_mysql" {
 
 output "ec2-g4-mysql" {
   value = [
-    for key, item in aws_instance.ec2_g4_myslq :
-      "ec2-g4-mysql ${key+1} - ${item.private_ip} - ssh -i ~/.ssh/id_rsa ubuntu@${item.public_dns} -o ServerAliveInterval=60"
+    for key, item in aws_instance.ec2_g4_myslq : 
+      "ec2-g4-mysql ${key+1} - ${item.private_ip} - ssh -i ~/.ssh/id_rsa ubuntu@${item.private_dns} -o ServerAliveInterval=60"
   ]
 }
