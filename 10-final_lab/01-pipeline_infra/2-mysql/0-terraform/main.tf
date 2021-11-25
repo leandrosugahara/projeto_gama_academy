@@ -3,7 +3,7 @@ provider "aws" {
 }
 
 resource "aws_instance" "ec2_g4_myslq" {
-  associate_public_ip_address = true
+  # associate_public_ip_address = true
   subnet_id     = var.my_subnet_id
   ami           = var.my_ami
   instance_type = var.tipo_worker[count.index]

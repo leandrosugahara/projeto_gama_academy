@@ -1,7 +1,7 @@
 my_vpc_id    = "vpc-0aff49d1cddbfff86"
 my_ami       = "ami-0e66f5495b4efdd0f" # "ami-0862ed1aaf3b6a03a" do k8s
 my_subnet_id = "subnet-0e5e9bdebaf94396f" # subnet privada para o mysql
-my_key_name  = "leandsu_ec2_dev"
+my_key_name  = "chave_privada_mysql_leandsu" # arquivo pem gerado
 my_key_dev  = "ssh"
 ip_haproxy =  "187.3.223.136"
 ids_subnets = ["subnet-037d9188710cf6ac2","subnet-0bb9a1894421c8d22","subnet-0e9e0ad7b155646eb"]
