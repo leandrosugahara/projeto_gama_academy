@@ -14,13 +14,13 @@ resource "aws_instance" "ec2_g4_myslq" {
   }
   count         = 1
   tags = {
-    Name = "ec2_g4_mysql-${count.index}"
+    Name = "ec2_g4_mysql-${count.index}-leandsu"
   }
   vpc_security_group_ids = [aws_security_group.acessos_g4_mysql.id]
 }
 
 resource "aws_security_group" "acessos_g4_mysql" {
-  name        = "acessos_mysql"
+  # name        = "acessos_mysql-leandsu"
   description = "acessos_mysql inbound traffic"
   vpc_id      = var.my_vpc_id
 
@@ -64,7 +64,7 @@ resource "aws_security_group" "acessos_g4_mysql" {
   ]
 
   tags = {
-    Name = "allow-mysql"
+    Name = "allow-mysql-leandsu"
   }
 }
 
