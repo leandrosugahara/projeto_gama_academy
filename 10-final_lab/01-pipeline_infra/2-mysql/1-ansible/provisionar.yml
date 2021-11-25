@@ -1,6 +1,7 @@
 - hosts: all
 
   environment:
+    DATABASE: "{{ lookup('env', 'DATABASE') }}" # SpringWebYoutube
     DATABASE_URL: "mysql://localhost:3306/{{ lookup('env', 'DATABASE') }}?useTimezone=true&serverTimezone=UTC"
     PASSWORD: "{{ lookup('env', 'PASSWORD') }}"
     USER: "{{ lookup('env', 'USER') }}"
@@ -79,7 +80,8 @@
   
     - name: "Cria o banco de dados MySQL"
       mysql_db:
-        name: SpringWebYoutube
+        name: "{{ lookup('env', 'DATABASE') }}"
+        # name: SpringWebYoutube
         # login_user: root
         # login_password: root
         login_user: "{{ lookup('env', 'USER') }}"
@@ -96,7 +98,7 @@
     - name: "Restore dump mysql"
       # shell: "mysql -u root -p ''password_mysql SpringWebYoutube < /home/ubuntu/db_backup.sql"
       # shell: "mysql -u root -p'root' SpringWebYoutube < /home/ubuntu/db_backup.sql"
-      # shell: "mysql -u {{ lookup('env', 'USER') }} -p'{{ lookup('env', 'PASSWORD') }}' {{ lookup('env', 'DATABASE') }} < /home/ubuntu/db_backup.sql"
-      shell: "mysql -u {{ lookup('env', 'USER') }} -p'{{ lookup('env', 'PASSWORD') }}' SpringWebYoutube < /home/ubuntu/db_backup.sql"
+      shell: "mysql -u {{ lookup('env', 'USER') }} -p'{{ lookup('env', 'PASSWORD') }}' {{ lookup('env', 'DATABASE') }} < /home/ubuntu/db_backup.sql"
+      # shell: "mysql -u {{ lookup('env', 'USER') }} -p'{{ lookup('env', 'PASSWORD') }}' SpringWebYoutube < /home/ubuntu/db_backup.sql"
 
 # ansible-playbook -i hosts provisionar.yml -u ubuntu --private-key ~/Desktop/devops/treinamentoItau
