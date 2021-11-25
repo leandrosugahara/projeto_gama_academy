@@ -4,7 +4,7 @@ provider "aws" {
 
 resource "aws_instance" "ec2_g4_myslq" {
   associate_public_ip_address = true
-  subnet_id     = var.ids_subnets[count.index]
+  subnet_id     = var.my_subnet_id
   ami           = var.my_ami
   instance_type = var.tipo_worker[count.index]
   key_name      = var.my_key_name
@@ -12,7 +12,7 @@ resource "aws_instance" "ec2_g4_myslq" {
     encrypted = true
     volume_size = 8
   }
-  count         = 3
+  count         = 1
   tags = {
     Name = "ec2_g4_mysql-${count.index}"
   }
