@@ -61,26 +61,160 @@ resource "aws_security_group" "acessos_g4_masters" {
   description = "acessos inbound traffic"
   vpc_id =  var.my_vpc_id
   
+  ingress = [
+    {
+      description      = "SSH from VPC"
+      from_port        = 22
+      to_port          = 22
+      protocol         = "tcp"
+      cidr_blocks      = ["0.0.0.0/0"]
+      ipv6_cidr_blocks = []
+      prefix_list_ids = null,
+      security_groups: null,
+      self: null
+    },
+    {
+      cidr_blocks      = []
+      description      = "Libera acesso k8s_masters"
+      from_port        = 0
+      ipv6_cidr_blocks = []
+      prefix_list_ids  = []
+      protocol         = "-1"
+      security_groups  = []
+      self             = true
+      to_port          = 0
+    },
+    {
+      cidr_blocks      = []
+      description      = "Libera acesso k8s_haproxy"
+      from_port        = 0
+      ipv6_cidr_blocks = []
+      prefix_list_ids  = []
+      protocol         = "-1"
+      security_groups  = [
+        "${aws_security_group.k8s_acessos_haproxy.id}",
+      ]
+      self             = false
+      to_port          = 0
+    },
+    {
+      cidr_blocks      = [
+        "0.0.0.0/0",
+      ]
+      description      = ""
+      from_port        = 0
+      ipv6_cidr_blocks = []
+      prefix_list_ids  = []
+      protocol         = "tcp"
+      security_groups  = []
+      self             = false
+      to_port          = 65535
+    },
+  ]
+
+  egress = [
+    {
+      from_port        = 0
+      to_port          = 0
+      protocol         = "-1"
+      cidr_blocks      = ["0.0.0.0/0"]
+      ipv6_cidr_blocks = [],
+      prefix_list_ids = null,
+      security_groups: null,
+      self: null,
+      description: "Libera dados da rede interna"
+    }
+  ]
+
   tags = {
     Name = "k8s_acessos_masters_leandsu"
   }
 }
 
-resource "aws_security_group" "acessos_g4_master_main" {
-  name        = "k8s-g4-acessos_master_main"
-  description = "acessos inbound traffic"
-  vpc_id =  var.my_vpc_id
-  
-  tags = {
-    Name = "k8s_acessos_master_main_leandsu"
-  }
-}
+# resource "aws_security_group" "acessos_g4_master_main" {
+#   name        = "k8s-g4-acessos_master_main"
+#   description = "acessos inbound traffic"
+#   vpc_id =  var.my_vpc_id
+
+
+#   tags = {
+#     Name = "k8s_acessos_master_main_leandsu"
+#   }
+# }
 
 resource "aws_security_group" "acessos_g4_haproxy" {
   name        = "k8s-g4-haproxy"
   description = "acessos inbound traffic"
   vpc_id =  var.my_vpc_id
 
+
+  ingress = [
+    {
+      description      = "SSH from VPC"
+      from_port        = 22
+      to_port          = 22
+      protocol         = "tcp"
+      cidr_blocks      = ["0.0.0.0/0"]
+      ipv6_cidr_blocks = []
+      prefix_list_ids = null,
+      security_groups: null,
+      self: null
+    },
+    {
+      cidr_blocks      = []
+      description      = "Libera acesso k8s_masters"
+      from_port        = 0
+      ipv6_cidr_blocks = []
+      prefix_list_ids  = []
+      protocol         = "-1"
+      security_groups  = [
+        # "${aws_security_group.k8s_acessos_masters.id}", 
+        # "sg-00b646360b2538cbb" # master
+      ]
+      self             = false
+      to_port          = 0
+    },
+    {
+      cidr_blocks      = []
+      description      = "Libera acesso k8s_workers"
+      from_port        = 0
+      ipv6_cidr_blocks = []
+      prefix_list_ids  = []
+      protocol         = "-1"
+      security_groups  = [
+        # "${aws_security_group.k8s_acessos_masters.id}", 
+        # "sg-0f85578058e44266a"  # worker
+      ]
+      self             = false
+      to_port          = 0
+    },
+    {
+      cidr_blocks      = []
+      description      = ""
+      from_port        = 0
+      ipv6_cidr_blocks = []
+      prefix_list_ids  = []
+      protocol         = "tcp"
+      security_groups  = []
+      self             = true
+      to_port          = 65535
+    },
+  ]
+
+  egress = [
+    {
+      from_port        = 0
+      to_port          = 0
+      protocol         = "-1"
+      cidr_blocks      = ["0.0.0.0/0"]
+      ipv6_cidr_blocks = [],
+      prefix_list_ids = null,
+      security_groups: null,
+      self: null,
+      description: "Libera dados da rede interna"
+    }
+  ]
+  
   tags = {
     Name = "k8s_acessos_haproxy_leandsu"
   }
@@ -90,6 +224,82 @@ resource "aws_security_group" "acessos_g4_workers" {
   name        = "k8s-g4-workers"
   description = "acessos inbound traffic"
   vpc_id =  var.my_vpc_id
+
+  ingress = [
+    {
+      description      = "SSH from VPC"
+      from_port        = 22
+      to_port          = 22
+      protocol         = "tcp"
+      cidr_blocks      = ["0.0.0.0/0"]
+      ipv6_cidr_blocks = []
+      prefix_list_ids = null,
+      security_groups: null,
+      self: null
+    },
+    {
+      cidr_blocks      = []
+      description      = ""
+      from_port        = 0
+      ipv6_cidr_blocks = []
+      prefix_list_ids  = []
+      protocol         = "-1"
+      security_groups  = [
+        "${aws_security_group.k8s_acessos_masters.id}",
+      ]
+      self             = false
+      to_port          = 0
+    },
+    {
+      cidr_blocks      = []
+      description      = "Libera acesso k8s_haproxy"
+      from_port        = 0
+      ipv6_cidr_blocks = []
+      prefix_list_ids  = []
+      protocol         = "-1"
+      security_groups  = [
+        "${aws_security_group.k8s_acessos_haproxy.id}",
+      ]
+      self             = true
+      to_port          = 0
+    },
+    {
+      cidr_blocks      = []
+      description      = ""
+      from_port        = 0
+      ipv6_cidr_blocks = []
+      prefix_list_ids  = []
+      protocol         = "tcp"
+      security_groups  = []
+      self             = true
+      to_port          = 65535
+    },
+    {
+      description      = "Liberando app para o mundo!"
+      from_port        = 30000
+      to_port          = 30000
+      protocol         = "tcp"
+      cidr_blocks      = ["0.0.0.0/0"]
+      ipv6_cidr_blocks = ["::/0"]
+      prefix_list_ids = null,
+      security_groups: null,
+      self: null
+    },       
+  ]
+
+  egress = [
+    {
+      from_port        = 0
+      to_port          = 0
+      protocol         = "-1"
+      cidr_blocks      = ["0.0.0.0/0"]
+      ipv6_cidr_blocks = [],
+      prefix_list_ids = null,
+      security_groups: null,
+      self: null,
+      description: "Libera dados da rede interna"
+    }
+  ]
 
   tags = {
     Name = "k8s_acessos_workers_leandsu"
