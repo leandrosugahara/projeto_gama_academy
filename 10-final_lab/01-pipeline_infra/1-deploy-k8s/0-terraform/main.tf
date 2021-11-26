@@ -214,7 +214,7 @@ resource "aws_security_group" "acessos_g4_haproxy" {
       description: "Libera dados da rede interna"
     }
   ]
-  
+
   tags = {
     Name = "k8s_acessos_haproxy_leandsu"
   }
@@ -276,8 +276,8 @@ resource "aws_security_group" "acessos_g4_workers" {
     },
     {
       description      = "Liberando app para o mundo!"
-      from_port        = 30000
-      to_port          = 30000
+      from_port        = 30001
+      to_port          = 30001
       protocol         = "tcp"
       cidr_blocks      = ["0.0.0.0/0"]
       ipv6_cidr_blocks = ["::/0"]
