@@ -199,6 +199,14 @@ resource "aws_security_group" "acessos_g4_haproxy" {
       self             = true
       to_port          = 65535
     },
+    {
+      cidr_blocks      = []
+      description      = ""
+      from_port        = 0
+      protocol         = "all"
+      security_groups  = []
+      to_port          = 0
+    },
   ]
 
   egress = [
