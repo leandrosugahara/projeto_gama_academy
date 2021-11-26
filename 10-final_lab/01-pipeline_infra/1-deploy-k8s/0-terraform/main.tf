@@ -200,7 +200,7 @@ resource "aws_security_group" "acessos_g4_haproxy" {
     #   to_port          = 65535
     # },
     {
-      cidr_blocks      = []
+      cidr_blocks      = ["0.0.0.0/0"]
       description      = "Libera todos acessos"
       from_port        = 0
       to_port          = 0
