@@ -166,7 +166,7 @@ resource "aws_security_group" "acessos_g4_haproxy" {
       from_port        = 0
       ipv6_cidr_blocks = []
       prefix_list_ids  = []
-      protocol         = "-1"
+      protocol         = "all"
       security_groups  = [
         # "${aws_security_group.k8s_acessos_masters.id}", 
         "sg-01298e6cd888d388a" # master
@@ -180,7 +180,7 @@ resource "aws_security_group" "acessos_g4_haproxy" {
       from_port        = 0
       ipv6_cidr_blocks = []
       prefix_list_ids  = []
-      protocol         = "-1"
+      protocol         = "all"
       security_groups  = [
         # "${aws_security_group.k8s_acessos_masters.id}", 
         "sg-02e06996ca5da2d0d"  # worker
