@@ -73,43 +73,54 @@ resource "aws_security_group" "acessos_g4_masters" {
       security_groups: null,
       self: null
     },
+    # {
+    #   cidr_blocks      = []
+    #   description      = "Libera acesso k8s_masters"
+    #   from_port        = 0
+    #   ipv6_cidr_blocks = []
+    #   prefix_list_ids  = []
+    #   protocol         = "-1"
+    #   security_groups  = []
+    #   self             = true
+    #   to_port          = 0
+    # },
+    # {
+    #   cidr_blocks      = []
+    #   description      = "Libera acesso k8s_haproxy"
+    #   from_port        = 0
+    #   ipv6_cidr_blocks = []
+    #   prefix_list_ids  = []
+    #   protocol         = "-1"
+    #   security_groups  = [
+    #     "${aws_security_group.acessos_g4_haproxy.id}",
+    #   ]
+    #   self             = false
+    #   to_port          = 0
+    # },
+    # {
+    #   cidr_blocks      = [
+    #     "0.0.0.0/0",
+    #   ]
+    #   description      = ""
+    #   from_port        = 0
+    #   ipv6_cidr_blocks = []
+    #   prefix_list_ids  = []
+    #   protocol         = "tcp"
+    #   security_groups  = []
+    #   self             = false
+    #   to_port          = 65535
+    # },
     {
-      cidr_blocks      = []
-      description      = "Libera acesso k8s_masters"
+      cidr_blocks      = ["0.0.0.0/0"]
+      description      = "Libera todos acessos"
       from_port        = 0
-      ipv6_cidr_blocks = []
-      prefix_list_ids  = []
-      protocol         = "-1"
-      security_groups  = []
-      self             = true
       to_port          = 0
-    },
-    {
-      cidr_blocks      = []
-      description      = "Libera acesso k8s_haproxy"
-      from_port        = 0
       ipv6_cidr_blocks = []
       prefix_list_ids  = []
-      protocol         = "-1"
-      security_groups  = [
-        "${aws_security_group.acessos_g4_haproxy.id}",
-      ]
-      self             = false
-      to_port          = 0
-    },
-    {
-      cidr_blocks      = [
-        "0.0.0.0/0",
-      ]
-      description      = ""
-      from_port        = 0
-      ipv6_cidr_blocks = []
-      prefix_list_ids  = []
-      protocol         = "tcp"
+      protocol         = "all"
       security_groups  = []
       self             = false
-      to_port          = 65535
-    },
+    },    
   ]
 
   egress = [
@@ -248,42 +259,53 @@ resource "aws_security_group" "acessos_g4_workers" {
       security_groups: null,
       self: null
     },
+    # {
+    #   cidr_blocks      = []
+    #   description      = ""
+    #   from_port        = 0
+    #   ipv6_cidr_blocks = []
+    #   prefix_list_ids  = []
+    #   protocol         = "-1"
+    #   security_groups  = [
+    #     "${aws_security_group.acessos_g4_masters.id}",
+    #   ]
+    #   self             = false
+    #   to_port          = 0
+    # },
+    # {
+    #   cidr_blocks      = []
+    #   description      = "Libera acesso k8s_haproxy"
+    #   from_port        = 0
+    #   ipv6_cidr_blocks = []
+    #   prefix_list_ids  = []
+    #   protocol         = "-1"
+    #   security_groups  = [
+    #     "${aws_security_group.acessos_g4_haproxy.id}",
+    #   ]
+    #   self             = true
+    #   to_port          = 0
+    # },
+    # {
+    #   cidr_blocks      = []
+    #   description      = ""
+    #   from_port        = 0
+    #   ipv6_cidr_blocks = []
+    #   prefix_list_ids  = []
+    #   protocol         = "tcp"
+    #   security_groups  = []
+    #   self             = true
+    #   to_port          = 65535
+    # },
     {
-      cidr_blocks      = []
-      description      = ""
+      cidr_blocks      = ["0.0.0.0/0"]
+      description      = "Libera todos acessos"
       from_port        = 0
-      ipv6_cidr_blocks = []
-      prefix_list_ids  = []
-      protocol         = "-1"
-      security_groups  = [
-        "${aws_security_group.acessos_g4_masters.id}",
-      ]
-      self             = false
       to_port          = 0
-    },
-    {
-      cidr_blocks      = []
-      description      = "Libera acesso k8s_haproxy"
-      from_port        = 0
       ipv6_cidr_blocks = []
       prefix_list_ids  = []
-      protocol         = "-1"
-      security_groups  = [
-        "${aws_security_group.acessos_g4_haproxy.id}",
-      ]
-      self             = true
-      to_port          = 0
-    },
-    {
-      cidr_blocks      = []
-      description      = ""
-      from_port        = 0
-      ipv6_cidr_blocks = []
-      prefix_list_ids  = []
-      protocol         = "tcp"
+      protocol         = "all"
       security_groups  = []
-      self             = true
-      to_port          = 65535
+      self             = false
     },
     {
       description      = "Liberando app para o mundo!"
