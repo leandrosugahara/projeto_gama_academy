@@ -160,34 +160,34 @@ resource "aws_security_group" "acessos_g4_haproxy" {
       security_groups: null,
       self: null
     },
-    {
-      cidr_blocks      = []
-      description      = "Libera acesso k8s_masters"
-      from_port        = 0
-      ipv6_cidr_blocks = []
-      prefix_list_ids  = []
-      protocol         = "all"
-      security_groups  = [
-        # "${aws_security_group.k8s_acessos_masters.id}", 
-        "sg-01298e6cd888d388a" # master
-      ]
-      self             = false
-      to_port          = 0
-    },
-    {
-      cidr_blocks      = []
-      description      = "Libera acesso k8s_workers"
-      from_port        = 0
-      ipv6_cidr_blocks = []
-      prefix_list_ids  = []
-      protocol         = "all"
-      security_groups  = [
-        # "${aws_security_group.k8s_acessos_masters.id}", 
-        "sg-02e06996ca5da2d0d"  # worker
-      ]
-      self             = false
-      to_port          = 0
-    },
+    # {
+    #   cidr_blocks      = []
+    #   description      = "Libera acesso k8s_masters"
+    #   from_port        = 0
+    #   ipv6_cidr_blocks = []
+    #   prefix_list_ids  = []
+    #   protocol         = "all"
+    #   security_groups  = [
+    #     # "${aws_security_group.k8s_acessos_masters.id}", 
+    #     "sg-01298e6cd888d388a" # master
+    #   ]
+    #   self             = false
+    #   to_port          = 0
+    # },
+    # {
+    #   cidr_blocks      = []
+    #   description      = "Libera acesso k8s_workers"
+    #   from_port        = 0
+    #   ipv6_cidr_blocks = []
+    #   prefix_list_ids  = []
+    #   protocol         = "all"
+    #   security_groups  = [
+    #     # "${aws_security_group.k8s_acessos_masters.id}", 
+    #     "sg-02e06996ca5da2d0d"  # worker
+    #   ]
+    #   self             = false
+    #   to_port          = 0
+    # },
     {
       cidr_blocks      = []
       description      = ""
