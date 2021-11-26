@@ -208,7 +208,7 @@ resource "aws_security_group" "acessos_g4_haproxy" {
       prefix_list_ids  = []
       protocol         = "all"
       security_groups  = []
-      self             = true
+      self             = false
     },
   ]
 
