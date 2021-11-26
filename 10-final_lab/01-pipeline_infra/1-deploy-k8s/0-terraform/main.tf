@@ -142,16 +142,16 @@ resource "aws_security_group" "acessos_g4_masters" {
   }
 }
 
-# resource "aws_security_group" "acessos_g4_master_main" {
-#   name        = "k8s-g4-acessos_master_main"
-#   description = "acessos inbound traffic"
-#   vpc_id =  var.my_vpc_id
+resource "aws_security_group" "acessos_g4_master_main" {
+  name        = "k8s-g4-acessos_master_main"
+  description = "acessos inbound traffic"
+  vpc_id =  var.my_vpc_id
 
 
-#   tags = {
-#     Name = "k8s_acessos_master_main_leandsu"
-#   }
-# }
+  tags = {
+    Name = "k8s_acessos_master_main_leandsu"
+  }
+}
 
 resource "aws_security_group" "acessos_g4_haproxy" {
   name        = "k8s-g4-haproxy"
