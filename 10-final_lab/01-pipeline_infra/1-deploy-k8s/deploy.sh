@@ -119,7 +119,7 @@ ff00::0 ip6-mcastprefix
 ff02::1 ip6-allnodes
 ff02::2 ip6-allrouters
 ff02::3 ip6-allhosts
-" > ../1-ansible/01-k8s-install-masters_e_workers/host/hosts
+" > ../1-ansible/01-k8s-install-masters_e_workers/hosts
 
 
 cd ../1-ansible/01-k8s-install-masters_e_workers
