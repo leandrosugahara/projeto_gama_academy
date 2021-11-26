@@ -7,3 +7,4 @@ ip_haproxy =  "187.3.223.136"
 ids_subnets = ["subnet-037d9188710cf6ac2","subnet-0bb9a1894421c8d22","subnet-0e9e0ad7b155646eb"]
 tipo_master = ["t2.large","t3.large","t2.large"]
 tipo_worker = ["t2.medium","t3.medium","t2.medium"]
+tipo_ambiente = ["DEV","STAGE","PROD"]

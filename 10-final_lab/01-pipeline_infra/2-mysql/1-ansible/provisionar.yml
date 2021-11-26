@@ -54,6 +54,12 @@
       args:
         executable: /bin/bash
 
+    - name: "Trocando mysqld.cnf"
+      copy:
+        src:  "sql/mysqld.cnf"
+        dest: "/etc/mysql/mysql.conf.d/mysqld.cnf"
+      become: yes
+      
     - name: "Lavanta serviço do mysql"
       become: yes
       service:

@@ -12,9 +12,9 @@ resource "aws_instance" "ec2_g4_myslq" {
     encrypted = true
     volume_size = 8
   }
-  count         = 1
+  count         = 3
   tags = {
-    Name = "ec2_g4_mysql-${count.index}-leandsu"
+    Name = "ec2_g4_mysql-${var.tipo_ambiente[count.index]}-leandsu"
   }
   vpc_security_group_ids = [aws_security_group.acessos_g4_mysql.id]
 }
