@@ -7,7 +7,7 @@
       shell: "kubeadm reset -f"
 
     - name: "Fazendo join kubernetes master"
-      shell: kubeadm join k8s-haproxy:6443 --token ybwpe4.zwv256zbszn25bce  --discovery-token-ca-cert-hash sha256:e924d30515cf616f9993add2002f146761daa4ec1360e22432a2b037a8ba6af2  --control-plane --certificate-key a7870091bef7cbaabde12ae641ecc4fcf84584cc0f181651d8c09affe8fa82af
+      shell: kubeadm join k8s-haproxy:6443 --token psygxi.x9ly3migo0xksx4v  --discovery-token-ca-cert-hash sha256:8ff4eef689ae23dc8114803da5d80b6157400d59ef33c37ac0df0ee96e6da720  --control-plane --certificate-key b677efbec66e60c89daa406a0cd7a95d92afa7eaa4228945bfb4e225347ffe40
 
     - name: "Colocando no path da maquina o conf do kubernetes"
       shell: mkdir -p /home/ubuntu/.kube && sudo cp -f /etc/kubernetes/admin.conf /home/ubuntu/.kube/config && sudo chown 1000:1000 /home/ubuntu/.kube/config && export KUBECONFIG=/etc/kubernetes/admin.conf
@@ -22,7 +22,7 @@
       shell: "kubeadm reset -f"
 
     - name: "Fazendo join kubernetes worker"
-      shell: kubeadm join k8s-haproxy:6443 --token ybwpe4.zwv256zbszn25bce  --discovery-token-ca-cert-hash sha256:e924d30515cf616f9993add2002f146761daa4ec1360e22432a2b037a8ba6af2 
+      shell: kubeadm join k8s-haproxy:6443 --token psygxi.x9ly3migo0xksx4v  --discovery-token-ca-cert-hash sha256:8ff4eef689ae23dc8114803da5d80b6157400d59ef33c37ac0df0ee96e6da720 
 
 #---
 - hosts:

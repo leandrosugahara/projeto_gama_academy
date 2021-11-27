@@ -162,7 +162,7 @@ resource "aws_security_group" "k8s_acessos_haproxy" {
       protocol         = "-1"
       security_groups  = [
         # "${aws_security_group.k8s_acessos_masters.id}", 
-        "sg-00b646360b2538cbb" # master
+        "sg-02dcf44c0c1b8e754" # master
       ]
       self             = false
       to_port          = 0
@@ -176,7 +176,7 @@ resource "aws_security_group" "k8s_acessos_haproxy" {
       protocol         = "-1"
       security_groups  = [
         # "${aws_security_group.k8s_acessos_masters.id}", 
-        "sg-0f85578058e44266a"  # worker
+        "sg-0cd733d76cf3ae4c7"  # worker
       ]
       self             = false
       to_port          = 0
