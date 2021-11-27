@@ -96,21 +96,21 @@ frontend kubernetes
         mode tcp
         bind $ID_HAPROXY:6443 # IP ec2 Haproxy 
         option tcplog
-        default_backend k8s-g4-masters
+        default_backend k8s-masters
 
-backend k8s-g4-masters
+backend k8s-masters
         mode tcp
         balance roundrobin # maq1, maq2, maq3  # (check) verifica 3 vezes negativo (rise) verifica 2 vezes positivo
-        server k8s-g4-master-0 $ID_M1:6443 check fall 3 rise 2 # IP ec2 Cluster Master k8s - 1 
-        server k8s-g4-master-1 $ID_M2:6443 check fall 3 rise 2 # IP ec2 Cluster Master k8s - 2 
-        server k8s-g4-master-2 $ID_M3:6443 check fall 3 rise 2 # IP ec2 Cluster Master k8s - 3 
+        server k8s-master-0 $ID_M1:6443 check fall 3 rise 2 # IP ec2 Cluster Master k8s - 1 
+        server k8s-master-1 $ID_M2:6443 check fall 3 rise 2 # IP ec2 Cluster Master k8s - 2 
+        server k8s-master-2 $ID_M3:6443 check fall 3 rise 2 # IP ec2 Cluster Master k8s - 3 
         
 " > ../1-ansible/01-k8s-install-masters_e_workers/haproxy/haproxy.cfg
 
 
 echo "
 127.0.0.1 localhost
-$ID_HAPROXY k8s-g4-haproxy # IP privado proxy
+$ID_HAPROXY k8s-haproxy # IP privado proxy
 
 # The following lines are desirable for IPv6 capable hosts
 ::1 ip6-localhost ip6-loopback

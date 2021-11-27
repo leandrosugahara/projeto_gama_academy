@@ -2,11 +2,6 @@ provider "aws" {
   region = "sa-east-1"
 }
 
-resource "aws_key_pair" "leandsu_ec2_dev" {
-  key_name   = var.my_key_name
-  public_key = var.my_key_dev
-}
-
 resource "aws_instance" "k8s_g4_proxy" {
   associate_public_ip_address = true
   subnet_id = var.my_subnet_id
