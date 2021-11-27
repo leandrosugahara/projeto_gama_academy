@@ -69,9 +69,9 @@
     - name: "Criando senha root mysql"
       become: yes
       mysql_user:
-        name: root
+        name: "{{ lookup('env', 'USER') }}"
         host: localhost
-        password: root
+        password: "{{ lookup('env', 'PASSWORD') }}"
         # login_user: "{{ lookup('env', 'USER') }}"
         # login_password: "{{ lookup('env', 'PASSWORD') }}"
         priv: "*.*:ALL,GRANT"
@@ -106,5 +106,13 @@
       # shell: "mysql -u root -p'root' SpringWebYoutube < /home/ubuntu/db_backup.sql"
       shell: "mysql -u {{ lookup('env', 'USER') }} -p'{{ lookup('env', 'PASSWORD') }}' {{ lookup('env', 'DATABASE') }} < /home/ubuntu/db_backup.sql"
       # shell: "mysql -u {{ lookup('env', 'USER') }} -p'{{ lookup('env', 'PASSWORD') }}' SpringWebYoutube < /home/ubuntu/db_backup.sql"
+
+    - name: "Libera permissão para acesso externo a database"
+      become: yes
+      shell: "mysql -u {{ lookup('env', 'USER') }} -p'{{ lookup('env', 'PASSWORD') }}' --execute=\"CREATE USER '{{ lookup('env', 'USER') }}'@'%' IDENTIFIED WITH mysql_native_password BY '{{ lookup('env', 'PASSWORD') }}'; GRANT ALL PRIVILEGES ON *.* TO '{{ lookup('env', 'USER') }}'@'%'; FLUSH PRIVILEGES;\""
+
+    - name: "Restart mysql"
+      become: yes
+      shell: "service mysql restart"
 
 # ansible-playbook -i hosts provisionar.yml -u ubuntu --private-key ~/Desktop/devops/treinamentoItau

@@ -16,8 +16,6 @@ resource "aws_instance" "k8s_g4_proxy" {
     Name = "k8s-g4-haproxy-leandsu"
   }
   vpc_security_group_ids = [aws_security_group.acessos_g4_haproxy.id]
-    # vpc_security_group_ids = [aws_security_group.acessos_g4_workers.id]
-  # vpc_security_group_ids = [aws_security_group.acessos_g4_masters.id]
 }
 
 resource "aws_instance" "k8s_g4_masters" {
@@ -35,9 +33,6 @@ resource "aws_instance" "k8s_g4_masters" {
     Name = "k8s-g4-master-${count.index}-leandsu"
   }
   vpc_security_group_ids = [aws_security_group.acessos_g4_masters.id]
-  depends_on = [
-    aws_instance.k8s_g4_workers,
-  ]
 }
 
 resource "aws_instance" "k8s_g4_workers" {
@@ -55,7 +50,6 @@ resource "aws_instance" "k8s_g4_workers" {
     Name = "k8s_g4_workers-${count.index}-leandsu"
   }
   vpc_security_group_ids = [aws_security_group.acessos_g4_workers.id]
-  # vpc_security_group_ids = [aws_security_group.acessos_g4_masters.id]
 }
 
 
