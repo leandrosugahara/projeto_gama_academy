@@ -209,6 +209,17 @@ resource "aws_security_group_rule" "hproxy_k8s_ingress_ssh" {
   security_group_id = aws_security_group.acessos_g4_haproxy.id
 }
 
+resource "aws_security_group_rule" "hproxy_k8s_ingress_tcp" {
+  type              = "ingress"
+  description       = "SG rule allowing access to TCP for HPROXY SG."
+  from_port         = 0
+  to_port           = 65535
+  protocol          = "tcp"
+  cidr_blocks       = ["0.0.0.0/0"]
+  ipv6_cidr_blocks  = ["::/0"]
+  security_group_id = aws_security_group.acessos_g4_haproxy.id
+}
+
 resource "aws_security_group_rule" "hproxy_k8s_ingress_masters" {
   type             = "ingress"
   description      = "SG rule allowing masters SG to access HPROXY SG."
