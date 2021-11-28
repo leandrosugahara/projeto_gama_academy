@@ -1,6 +1,23 @@
 - hosts: all
   become: yes
   tasks:
+    - name: "Copia os arquivos para executar o deployment dos pods"
+      copy:
+        src: "../kubernetes"
+        dest: "/root/"
+      
+    - name: "Aplica o deployment de DEV"
+      shell: kubectl apply -f /root/kubernetes/deployment_dev.yml
+
+    - name: "Aplica o deployment de STAGE"
+      shell: kubectl apply -f /root/kubernetes/deployment_stage.yml
+
+    - name: "Aplica o deployment de PROD"
+      shell: kubectl apply -f /root/kubernetes/deployment_prod.yml
+
+    - name: "Valida o deployment dos Pods"
+      shell: kubectl get all -o wide
+
     # - name: "Upload k8s-deploy"
     #   copy:
     #     src: "k8s-deploy"
@@ -24,7 +41,7 @@
     # - name: "Aplicar hpa"
     #   shell: kubectl apply -f /root/k8s-deploy/7.5-hpa-javadb.yml
 
-    - shell: "kubectl get pods | grep mysql"
+    - shell: "kubectl get pods"
       register: ps
     - debug:
         msg: " '{{ ps.stdout_lines }}' "
