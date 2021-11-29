@@ -45,17 +45,17 @@ pipeline {
         }
         stage('Create files for deployment Kubernetes Java APP') {
             steps {
-                sh "10-final_lab/02-pipeline_app/01-deploy_app/create_deployment.sh"
+                sh "10-final_lab/02-pipeline_app/02-deploy_app/create_deployment.sh"
             }
         }
         stage('Deployment Kubernetes Java APP') {
             steps {
-                sh "10-final_lab/02-pipeline_app/01-deploy_app/deploy.sh"
+                sh "10-final_lab/02-pipeline_app/02-deploy_app/deploy.sh"
             }
         }
         stage('Validação Java APP K8s') {
             steps {
-                sh "10-final_lab/02-pipeline_app/01-deploy_app/valida_app_java_k8s.sh"
+                sh "10-final_lab/02-pipeline_app/02-deploy_app/valida_app_java_k8s.sh"
             }
         }
                 

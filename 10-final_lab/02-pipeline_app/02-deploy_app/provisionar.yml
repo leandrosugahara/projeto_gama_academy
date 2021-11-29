@@ -3,7 +3,7 @@
   tasks:
     - name: "Copia os arquivos para executar o deployment dos pods"
       copy:
-        src: "../kubernetes"
+        src: "kubernetes"
         dest: "/root/"
       
     - name: "Aplica o deployment de DEV"
