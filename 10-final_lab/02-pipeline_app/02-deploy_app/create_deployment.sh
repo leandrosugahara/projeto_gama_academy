@@ -4,7 +4,7 @@ echo $PASSWORD
 echo $DATABASE
 echo $DEV
 echo $PROD 
-echo $STAGE
+echo $STAGE      
 cat <<EOF > 10-final_lab/02-pipeline_app/02-deploy_app/kubernetes/deployment_prod.yml
 apiVersion: v1
 kind: ConfigMap
