@@ -5,7 +5,7 @@ pipeline {
         string(name: 'USER', defaultValue: 'root', description: 'Digite o usuario do banco de dados "root"')
         string(name: 'PASSWORD', defaultValue: 'root', description: 'Digite a senha do banco de dados "root"')
         string(name: 'DATABASE', defaultValue: 'SpringWebYoutube', description: 'Digite o nome da database "SpringWebYoutube"')
-        string(name: 'DATABASE_URL', defaultValue: 'mysql://mysql:3306/SpringWebYoutube?useTimezone=true&serverTimezone=UTC', description: 'Digite a URL da DATABASE "mysql://127.0.0.1:3306/treinamento_database"')
+        string(name: 'DATABASE_URL', defaultValue: 'mysql://localhost:3306/SpringWebYoutube?useTimezone=true&serverTimezone=UTC', description: 'Digite a URL da DATABASE "mysql://127.0.0.1:3306/treinamento_database"')
         string(name: 'DEV', defaultValue: '10.90.106.130', description: 'Digite o ip do servidor myslq de Desenvolvimento')
         string(name: 'STAGE', defaultValue: '10.90.103.89', description: 'Digite o ip do servidor mysql de Stage')
         string(name: 'PROD', defaultValue: '10.90.108.248', description: 'Digite o ip do servidor mysql de Produção')
