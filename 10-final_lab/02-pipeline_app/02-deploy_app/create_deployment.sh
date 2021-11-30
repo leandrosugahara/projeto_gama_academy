@@ -5,6 +5,7 @@ echo $DATABASE
 echo $DEV
 echo $PROD 
 echo $STAGE 
+mkdir kubernetes     
 cat <<EOF > kubernetes/deployment_prod.yml
 apiVersion: v1
 kind: ConfigMap
