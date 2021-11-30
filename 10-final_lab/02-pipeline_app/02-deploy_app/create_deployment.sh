@@ -29,7 +29,7 @@ spec:
     spec:
       containers:
         - name: container-pod-javadb-prod
-          image: weslleyf/crud-java-login:v0.0.1
+          image: leandsu/crud-java-login:v1.0.0
           env:
             - name: USER
               valueFrom:
@@ -101,7 +101,7 @@ spec:
     spec:
       containers:
         - name: container-pod-javadb-stage
-          image: weslleyf/crud-java-login:v0.0.1
+          image: leandsu/crud-java-login:v1.0.0
           env:
             - name: USER
               valueFrom:
@@ -160,7 +160,7 @@ spec:
     spec:
       containers:
         - name: container-pod-javadb-dev
-          image: weslleyf/crud-java-login:v0.0.1
+          image: leandsu/crud-java-login:v1.0.0
           env:
             - name: USER
               valueFrom:

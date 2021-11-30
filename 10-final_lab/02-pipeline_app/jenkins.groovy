@@ -9,7 +9,7 @@ pipeline {
         string(name: 'DEV', defaultValue: '10.90.106.130', description: 'Digite o ip do servidor myslq de Desenvolvimento')
         string(name: 'STAGE', defaultValue: '10.90.103.89', description: 'Digite o ip do servidor mysql de Stage')
         string(name: 'PROD', defaultValue: '10.90.108.248', description: 'Digite o ip do servidor mysql de Produção')
-        string(name: 'K8sMaster', defaultValue: 'c2-54-94-55-234.sa-east-1.compute.amazonaws.com', description: 'Digite o ip publico ou DNS do Kubernets Master - 1')
+        string(name: 'K8sMaster', defaultValue: 'ec2-18-229-157-51.sa-east-1.compute.amazonaws.com', description: 'Digite o ip publico ou DNS do Kubernets Master - 1')
 
     } 
     stages {
