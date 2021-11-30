@@ -6,6 +6,16 @@ echo $DEV
 echo $PROD 
 echo $STAGE 
 mkdir kubernetes     
+echo "
+[ambientes]
+$DEV
+$STAGE
+$PROD
+[mysql]
+$USER
+$PASSWORD
+$DATABASE
+" > kubernetes/variaveis
 cat <<EOF > kubernetes/deployment_prod.yml
 apiVersion: v1
 kind: ConfigMap
