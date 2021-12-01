@@ -6,11 +6,11 @@
         src: "k8s"
         dest: "/root/"
       
-    - name: "Aplica o deployment de DEV"
-      shell: kubectl apply -f /root/k8s/deployment_dev.yml
+    # - name: "Aplica o deployment de DEV"
+    #   shell: kubectl apply -f /root/k8s/deployment_dev.yml
 
-    - name: "Aplica o deployment de STAGE"
-      shell: kubectl apply -f /root/k8s/deployment_stage.yml
+    # - name: "Aplica o deployment de STAGE"
+    #   shell: kubectl apply -f /root/k8s/deployment_stage.yml
 
     - name: "Aplica o deployment de PROD"
       shell: kubectl apply -f /root/k8s/deployment_prod.yml
