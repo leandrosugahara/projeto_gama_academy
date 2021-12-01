@@ -5,7 +5,7 @@ echo $DATABASE
 echo $DEV
 echo $PROD 
 echo $STAGE
-cat <<EOF > deployment_prod.yml
+cat <<EOF > 10-final_lab/02-pipeline_app/02-deploy_app/k8s/deployment_prod.yml
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -77,7 +77,7 @@ spec:
   maxReplicas: 10
   targetCPUUtilizationPercentage: 70
 EOF
-cat <<EOF > deployment_stage.yml
+cat <<EOF > 10-final_lab/02-pipeline_app/02-deploy_app/k8s/deployment_stage.yml
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -136,7 +136,7 @@ spec:
   selector:
     app: pod-javadb-stage
 EOF
-cat <<EOF > deployment_dev.yml
+cat <<EOF > 10-final_lab/02-pipeline_app/02-deploy_app/k8s/deployment_dev.yml
 apiVersion: v1
 kind: ConfigMap
 metadata:
