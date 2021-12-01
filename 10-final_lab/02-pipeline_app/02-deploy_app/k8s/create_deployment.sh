@@ -5,8 +5,7 @@ echo $DATABASE
 echo $DEV
 echo $PROD 
 echo $STAGE
-mkdir kubernetes
-cat <<EOF > kubernetes/deployment_prod.yml
+cat <<EOF > deployment_prod.yml
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -78,7 +77,7 @@ spec:
   maxReplicas: 10
   targetCPUUtilizationPercentage: 70
 EOF
-cat <<EOF > kubernetes/deployment_stage.yml
+cat <<EOF > deployment_stage.yml
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -137,7 +136,7 @@ spec:
   selector:
     app: pod-javadb-stage
 EOF
-cat <<EOF > kubernetes/deployment_dev.yml
+cat <<EOF > deployment_dev.yml
 apiVersion: v1
 kind: ConfigMap
 metadata:
