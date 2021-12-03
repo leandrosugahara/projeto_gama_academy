@@ -4,7 +4,7 @@ echo "
 $DEV
 $STAGE
 $PROD
-[kubernets-master]
+[k8s-master-1]
 $K8sMaster
 " > 10-final_lab/02-pipeline_app/02-deploy_app/hosts
 

@@ -1,4 +1,4 @@
-- hosts: kubernets-master
+- hosts: k8s-master-1
   become: yes
   tasks:
     - name: "Copia os arquivos para executar o deployment dos pods"

@@ -8,11 +8,12 @@
 # | grep -oP "(kubeadm join.*?certificate-key.*?)'" | sed 's/\\//g' | sed "s/'//g" | sed "s/'t//g" | sed "s/,//g"
 
 cd 10-final_lab/01-pipeline_infra/1-deploy-k8s/0-terraform
-terraform init
-terraform apply -auto-approve
+# terraform init
+# terraform apply -auto-approve
+terraform output
 
 echo  "Aguardando a criação das maquinas ..."
-sleep 5
+# sleep 5
 
 ID_M1=$(terraform output | grep 'k8s-g4-master 1 -' | awk '{print $4;exit}')
 ID_M1_DNS=$(terraform output | grep 'k8s-g4-master 1 -' | awk '{print $9;exit}' | cut -b 8-)
